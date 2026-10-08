@@ -60,8 +60,14 @@ describe("holidays (Decret 2-77-169, mmsp.gov.ma 2026-10-08)", () => {
 		expect(lunarHolidays(2026).find((h) => h.id === "eid-fitr")?.days).toBe(2);
 		expect(lunarHolidays(2026).find((h) => h.id === "hijra")?.days).toBe(1);
 	});
-	it("lunar without override is estimated placeholder", () => {
-		expect(lunarHolidays(2026)[0].estimated).toBe(true);
+	it("lunar without override is null date + approx month", () => {
+		const found = lunarHolidays(2026).find((h) => h.id === "eid-fitr");
+		expect(found?.date ?? null).toBeNull();
+		expect(found?.estimated).toBe(true);
+		expect(found?.approxMonth).toBe(3);
+		expect(lunarHolidays(2026).find((h) => h.id === "hijra")?.approxMonth).toBe(
+			6,
+		);
 	});
 	it("override makes exact + isHoliday spans 2 days", () => {
 		const ov = { "eid-fitr": "2026-03-20" };

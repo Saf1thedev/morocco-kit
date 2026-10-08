@@ -157,9 +157,36 @@ export const LUNAR: Holiday[] = [
 	},
 ];
 export interface Dated extends Holiday {
-	date: string;
-	end: string;
+	date: string | null;
+	end: string | null;
+	approxMonth: number | null;
 	estimated: boolean;
+}
+// Tabular Islamic calendar estimate: Hijri year ≈ Gregorian year - 622 + (Gregorian year - 622)/32.
+// Gives the APPROXIMATE Gregorian month for each lunar holiday; exact date needs Habous announcement.
+// Verified pattern: Fitr 2026-03-20 announced, shifting ~10 days earlier yearly — estimator within ±1 month.
+function estimateMonth(id: string, gYear: number): number | null {
+	const hijri = Math.round(((gYear - 622) * 33) / 32);
+	const anchor = (hYear: number, hMonth: number, hDay: number): number => {
+		// days since Hijri epoch to tabular date, converted to Gregorian month estimate
+		const hDays =
+			(hYear - 1) * 354 +
+			Math.floor((3 + 11 * hYear) / 30) +
+			(hMonth - 1) * 29.5 +
+			hDay;
+		const gDays = hDays + 227014; // Hijri epoch 622-07-16 → Rata Die offset
+		const g = new Date(Date.UTC(1, 0, 1) + (gDays - 1) * 86400000);
+		return g.getUTCMonth() + 1;
+	};
+	try {
+		if (id === "hijra") return anchor(hijri, 1, 1);
+		if (id === "mawlid") return anchor(hijri, 3, 12);
+		if (id === "eid-fitr") return anchor(hijri, 10, 1);
+		if (id === "eid-adha") return anchor(hijri, 12, 10);
+		return null;
+	} catch {
+		return null;
+	}
 }
 export function fixedHolidays(
 	year: number,
@@ -175,6 +202,7 @@ export function fixedHolidays(
 			...h,
 			date: `${year}-${h.fixed}`,
 			end: d.toISOString().slice(0, 10),
+			approxMonth: Number(String(h.fixed).slice(0, 2)),
 			estimated: false,
 		};
 	});
@@ -193,13 +221,15 @@ export function lunarHolidays(
 				...h,
 				date: a,
 				end: d.toISOString().slice(0, 10),
+				approxMonth: Number(a.slice(5, 7)),
 				estimated: false,
 			};
 		}
 		return {
 			...h,
-			date: `${year}-??-??`,
-			end: `${year}-??-??`,
+			date: null,
+			end: null,
+			approxMonth: estimateMonth(h.id, year),
 			estimated: true,
 		};
 	});
@@ -220,6 +250,6 @@ export function isHoliday(
 	o: { sector?: HolidaySector; overrides?: Record<string, string> } = {},
 ): boolean {
 	return holidays(year, o).some(
-		(h) => h.date !== `${year}-??-??` && iso >= h.date && iso <= h.end,
+		(h) => h.date !== null && h.end !== null && iso >= h.date && iso <= h.end,
 	);
 }

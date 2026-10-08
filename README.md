@@ -12,6 +12,11 @@ npm i github:Saf1thedev/morocco-kit#v0.1.0
 > Modern npm pauses once to approve the build script — approve `morocco-kit:prepare`, then `require('morocco-kit')` works.
 > No npm publishing: versioning is via git tags + GitHub Releases.
 
+> **Best-effort note:** ANRT's closed 10-digit format rule (CC 212, 9-digit NSN) is
+> authoritative. Operator/prefix mapping (6x/7x mobile, 5x fixed, 80x/89x special)
+> is best-effort from ANRT allocations + public numbering tables — validate against
+> the current ANRT Excel before relying on it for routing.
+
 ## Examples
 
 ```ts

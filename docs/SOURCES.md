@@ -9,6 +9,7 @@ Code cites the same URLs in comments. Fake examples only, no real personal data.
 - Prefix ranges: cross-checked via ANRT allocation Excel + Telephone_numbers_in_Morocco
   (https://en.wikipedia.org/wiki/Telephone_numbers_in_Morocco) — that page carries a
   single-source warning, so operator mapping is best-effort; format rule is authoritative.
+  README carries the same best-effort notice.
 - License: ANRT site (c) ANRT. Facts restated, file not redistributed.
 - Test vectors: fake numbers only (0661000000-style).
 
@@ -22,6 +23,15 @@ Code cites the same URLs in comments. Fake examples only, no real personal data.
 - Religious dates: lunar, announced by Ministere des Habous after crescent sighting.
   All religious entries estimated:true unless overridden with announced date.
 - License: government portal (c). Facts + decree numbers cited.
+
+### 31 Oct Unity Day verdict (checked 2026-10-08)
+- maroc.ma informational page lists 31 Oct "Aid Al Wahda (Unity Day)" among national
+  holidays (https://www.maroc.ma/en/morocco/religious-and-national-holidays) but cites
+  NO decree and NO duration — it is an editorial list, not legal text.
+- The binding table on mmsp.gov.ma (Decret 2-77-169 as amended, 17 days) does NOT
+  contain 31 Oct. The private-sector Decret 2-4-426 list does not contain it either.
+- Verdict: EXCLUDED from FIXED until a decree/BO number confirms paid-holiday status
+  and duration. Left in docs/ROADMAP.md as deferred. Tests assert 10 fixed / 14 total.
 
 ## 3. Regions — Decret 2.15.10 (12 regions)
 - URL: https://collectivites-territoriales.gov.ma/fr/actualites/nouveau-decoupage-territorial-du-royaume
