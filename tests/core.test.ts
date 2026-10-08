@@ -44,12 +44,17 @@ describe("phone (ANRT closed 10-digit plan, CC 212, NSN 9 digits)", () => {
 	});
 });
 
-describe("holidays (Decret 2-77-169, mmsp.gov.ma 2026-10-08)", () => {
-	it("10 fixed public, 11 Jan + 14 Jan present", () => {
+describe("holidays (2-77-169 as amended + 2.25.1140/2.26.14 Unity Day)", () => {
+	it("11 fixed public incl 31 Oct Unity Day, 11 Jan + 14 Jan present", () => {
 		const f = fixedHolidays(2026);
-		expect(f.length).toBe(10);
+		expect(f.length).toBe(11);
 		expect(f.find((h) => h.date === "2026-01-11")).toBeDefined();
 		expect(f.find((h) => h.date === "2026-01-14")).toBeDefined();
+		expect(f.find((h) => h.date === "2026-10-31")).toMatchObject({
+			id: "unity-day",
+			days: 1,
+		});
+		expect(isHoliday("2026-10-31", 2026)).toBe(true);
 	});
 	it("private excludes 1 Jan", () => {
 		expect(
@@ -76,8 +81,8 @@ describe("holidays (Decret 2-77-169, mmsp.gov.ma 2026-10-08)", () => {
 		expect(isHoliday("2026-03-19", 2026, { overrides: ov })).toBe(false);
 		expect(isHoliday("2026-07-30", 2026)).toBe(true);
 	});
-	it("total public = 14 occasions", () => {
-		expect(holidays(2026).length).toBe(14);
+	it("total public = 15 occasions", () => {
+		expect(holidays(2026).length).toBe(15);
 	});
 });
 

@@ -1,5 +1,7 @@
-// Holidays: Decret 2-77-169 (28 Feb 1977), table at mmsp.gov.ma accessed 2026-10-08.
-// 17 days: Hijra 1d, Mawlid 2d, Fitr 2d, Adha 2d, all fixed 1d each.
+// Holidays: Decret 2-77-169 (28 Feb 1977) as amended, incl. Decret 2.25.1140 (public)
+// and Royal communique 4 Nov 2025 + Decret 2.26.14 (private), all accessed 2026-10-08.
+// 18 days public (17-day mmsp table predates 2026 decrees + 31 Oct Unity Day added):
+// Hijra 1d, Mawlid 2d, Fitr 2d, Adha 2d, 11 fixed 1d each incl. 31 Oct.
 // Religious dates lunar, announced by Ministere des Habous after crescent sighting.
 export type HolidaySector = "public" | "private";
 export interface Holiday {
@@ -89,6 +91,25 @@ export const FIXED: Holiday[] = [
 		ar: "eid ach-chabab",
 		en: "Youth Day",
 		fixed: "08-21",
+		days: 1,
+		lunar: false,
+		sectors: ["public", "private"],
+	},
+	{
+		// Aid Al Wahda (Unity Day), 31 Oct, 1 day, both sectors.
+		// Royal Office communique 4 Nov 2025 (mre.gov.ma, accessed 2026-10-08):
+		// "decreter la journee du 31 octobre de chaque annee une fete nationale" nommee "Aid Al Wahda".
+		// Implemented by Decret 2.26.14 (completes 2.04.426, paid holidays agri/non-agri private)
+		// and Decret 2.25.1140 (completes 2.77.169, public administrations),
+		// adopted by Government Council 15 Jan 2026 (spokesperson Mustapha Baitas),
+		// published Feb 2026 (LeBrief 16 Feb 2026: "deux decrets ... ajoutent le 31 octobre
+		// a la liste des jours feries ... secteur public et prive").
+		// No BO number located as of 2026-10-08; mmsp.gov.ma 17-day table predates these decrees.
+		id: "unity-day",
+		fr: "Aid Al Wahda (Fete de l'Unite)",
+		ar: "eid al-wahda",
+		en: "Unity Day",
+		fixed: "10-31",
 		days: 1,
 		lunar: false,
 		sectors: ["public", "private"],

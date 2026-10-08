@@ -12,7 +12,9 @@
 - Bank RIB codes: need BAM-published bank list with codes + redistribution license.
 - Provinces/prefectures full list + cities: need HCP or Interior Ministry dataset with clear license.
 - CIN / ICE: dropped from v0.1. Only format-level checks if official public doc found.
-- 31 Oct Unity Day: appears on maroc.ma news but NOT in 2-77-169 17-day table — excluded until decree text confirms.
+- 31 Oct Unity Day: INCLUDED as 1-day fixed both sectors (Royal communique 4 Nov 2025,
+  Decrets 2.26.14 + 2.25.1140 adopted 15 Jan 2026, published Feb 2026).
+  BO number still not located — mmsp 17-day table predates decrees.
 
 ## Later
 - Single Next.js web app: API /v1 + docs + playground (one Vercel project).
